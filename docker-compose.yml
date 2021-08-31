@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+    es01:
+        image: elasticsearch:7.4.2
+        container_name: es02
+        environment:
+            - node.name=es01
+            - cluster.name=es-docker-cluster
+            - discovery.type=single-node
+        volumes:
+            - elastic:/usr/share/elasticsearch/data
+        networks:
+            - elastic
+        ports:
+            - 9200:9200
+            - 9300:9300
+networks:
+  elastic:
+    driver: bridge
+volumes:
+  elastic:

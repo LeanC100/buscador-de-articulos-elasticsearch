@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarin</title>
+    <!-- Style -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <form action="/" method="POST" autocomplete="off">
+                <div class="img">
+                    <img class="" src="{{url_for('static', filename='img/logo.png')}}" alt="">
+                </div>
+                <div class="search">
+                    <div class="search-content">
+                        <label for="q" search here></label><input class="search-text" type="text" name="q" id="q" value="{{q}}">
+                        <input class="search-botton" type="submit" value="buscar">
+                    </div>
+                </div>
+               <p style="display: none;">{{response}}</p> 
+            </form>
+        </div>
+        
+        <div class="list">
+                {% for resp in response.hits.hits %}
+                <a href="{{resp._source.sourceUrl}} " target="_blank">
+                <div class="list-item">
+                    <img class="list-img" src="{{resp._source.imageUrl}} " alt="">
+                <div class="list-text">
+                    <h2 class="list-title">{{resp._source.title}}</h2>
+                    <p class="list-category">{{resp._source.category}}</p>
+                </div>
+                </div>
+                </a>
+                {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
